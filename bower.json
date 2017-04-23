@@ -1,0 +1,18 @@
+{
+  "name": "desute-sort",
+  "description": "",
+  "main": "app.js",
+  "authors": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6"
+  }
+}

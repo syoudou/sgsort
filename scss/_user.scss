@@ -1,0 +1,139 @@
+.card-img-top{
+  display: block;
+  width: 88px;
+  margin: auto;
+}
+
+.table-img{
+  width: 88px;
+}
+
+.PieChart {
+  width:100%;
+}
+
+#PlotChart {
+  width:100%;
+}
+
+#tooltip {
+  font-size:14px;
+  pointer-events: none;			
+}
+
+.tick line{
+  opacity: 0.2
+}
+
+.card{
+  user-select: none;
+  display: inline-block;
+  min-width: 100px;
+}
+
+.card-outline-info {
+  transition-duration: 300ms;
+}
+
+.card-header{
+  font-size:18px;
+  font-weight: bold;
+  transition-duration: 500ms;
+}
+
+.card-header:first-letter {
+ font-size:24px;
+}
+
+.theaterOtherButton {
+  margin-bottom: 10px;
+}
+
+.order-1{
+  color: #FDEDA0;
+  background-color: #E8A0B4;
+}
+
+.order-2{
+  color: #4D86C3;
+  background-color: #DCE9F5;
+}
+
+.order-3{
+  color: #E88F4B;
+  background-color: #FBEBE0;
+}
+
+.order-retire{
+  color: #8E8E8E;
+  background-color: #E3E3E3;
+}
+
+.order-unselected{
+  color: #555555;
+  background-color: #FFFFFF;
+}
+
+.twitter-share-button{
+  color: #FFFFFF;
+  margin-bottom: 10px;
+  background-color: #1b95e0;
+  @include hover {
+    color: #FFFFFF;
+    background-color: #0c7abf;
+  }
+  @include hover-focus {
+    color: #FFFFFF;
+    background-color: #0c7abf;
+  }
+}
+
+.twitter-share-button img {
+  width: 30px;
+  margin-right: 15px;
+}
+
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Bold");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Regular");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  src: local("Helvetica Neue Regular");
+  font-weight: 200;
+}
+
+// IE hack
+@media all and (-ms-high-contrast: none) {
+  body,
+  tooltip,
+  popover {
+    font-family: Verdana, Meiryo, sans-serif;
+  }
+}
