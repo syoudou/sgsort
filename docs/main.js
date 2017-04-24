@@ -491,7 +491,7 @@ function initTheater() {
     finalizeTheater();
   });
 
-  theater.append("div").style("margin-top", "15px").classed("row", true).classed("justify-content-md-center", true).append("div").classed("col-md-6", true).classed("col-sm-8", true).append("button").classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true).attr("disabled", "").attr("id", "nextStage").text("次へ").on("click", function () {
+  theater.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true).append("div").classed("col-md-6", true).classed("col-sm-8", true).append("button").classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true).attr("disabled", "").attr("id", "nextStage").text("次へ").on("click", function () {
     orderList = [];
     myproduction.setdata(idolList);
     idolList = myproduction.getdata();
@@ -503,7 +503,7 @@ function initTheater() {
     }
   });
 
-  var otherButtonRow = theater.append("div").style("margin-top", "15px").classed("row", true).classed("justify-content-md-center", true);
+  var otherButtonRow = theater.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true);
 
   otherButtonRow.append("div").classed("col-md-4", true).classed("col-sm-6", true).append("button").attr("class", "btn btn-secondary btn-block theaterOtherButton").text("選択を解除する").on("click", function () {
     idolList.forEach(function (d) {
@@ -895,19 +895,19 @@ var resultView = function () {
 
       //リンク
 
-      result.append("div").classed("row", true).classed("justify-content-md-center", true).classed("row", true).append("div").classed("col-lg-6", true).classed("col-md-10", true).style("margin-top", "15px").append("h2").append("a").attr("class", "btn btn-block btn-success btn-lg").attr("href", serverURI).text("最初からキャラソートを始める");
+      result.append("div").classed("row", true).classed("justify-content-md-center", true).classed("row", true).append("div").classed("col-lg-6", true).classed("col-md-10", true).classed("mt-3", true).append("h2").append("a").attr("class", "btn btn-block btn-success btn-lg").attr("href", serverURI).text("最初からキャラソートを始める");
 
       //グラフ表示始め
-      result.append("div").style("margin-top", "15px").append("h2").text("結果のグラフ").append("hr");
+      result.append("div").classed("mt-3", true).append("h2").text("結果のグラフ").append("hr");
 
       var ChartSelectGroup = result.append("div").classed("row", true).append("div").classed("btn-group", true).attr("id", "ChartSelect").attr("data-toggle", "buttons");
-      var label_all = ChartSelectGroup.append("button").attr("class", "btn btn-lg btn-outline-info").attr("value", "all");
+      var label_all = ChartSelectGroup.append("button").attr("class", "btn chart-select-button btn-outline-info").attr("value", "all");
       label_all.append("span").text("全て");
-      var label_30 = ChartSelectGroup.append("button").attr("class", "btn btn-lg btn-outline-info active").attr("value", "30");
+      var label_30 = ChartSelectGroup.append("button").attr("class", "btn chart-select-button btn-outline-info active").attr("value", "30");
       label_30.append("span").text("TOP30");
-      var label_20 = ChartSelectGroup.append("button").attr("class", "btn btn-lg btn-outline-info").attr("value", "20");
+      var label_20 = ChartSelectGroup.append("button").attr("class", "btn chart-select-button btn-outline-info").attr("value", "20");
       label_20.append("span").text("TOP20");
-      var label_10 = ChartSelectGroup.append("button").attr("class", "btn btn-lg btn-outline-info").attr("value", "10");
+      var label_10 = ChartSelectGroup.append("button").attr("class", "btn chart-select-button btn-outline-info").attr("value", "10");
       label_10.append("span").text("TOP10");
 
       ChartSelectGroup.selectAll("button").on("click", function () {
@@ -1048,7 +1048,7 @@ var resultView = function () {
 
         var result = d3.select(".result");
 
-        var row = result.append("div").style("margin-top", "15px").classed("row", true).classed("justify-content-md-center", true);
+        var row = result.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true);
 
         var svgType = row.append("div").classed("col-lg-6", true).classed("col-md-8", true).append("svg").attr("id", "TypeChart").attr("class", "PieChart");
 

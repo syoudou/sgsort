@@ -9,14 +9,14 @@ class resultView {
     const result = d3.select(".container")
       .append("div")
       .classed("result", true);
-    
+
 
     result.append("div")
       .append("h2")
       .text("結果");
     result.append("div")
       .append("hr");
-      
+
     const table = result.append("div")
       .classed("row", true)
       .append("div")
@@ -113,16 +113,16 @@ class resultView {
       .append("div")
       .classed("col-lg-6", true)
       .classed("col-md-10", true)
-      .style("margin-top", "15px")
+      .classed("mt-3", true)
       .append("h2")
       .append("a")
-      .attr("class","btn btn-block btn-success btn-lg")
+      .attr("class", "btn btn-block btn-success btn-lg")
       .attr("href", serverURI)
       .text("最初からキャラソートを始める");
 
     //グラフ表示始め
     result.append("div")
-      .style("margin-top", "15px")
+      .classed("mt-3", true)
       .append("h2")
       .text("結果のグラフ")
       .append("hr");
@@ -136,22 +136,22 @@ class resultView {
       .attr("data-toggle", "buttons");
     const label_all = ChartSelectGroup
       .append("button")
-      .attr("class", "btn btn-lg btn-outline-info")
+      .attr("class", "btn chart-select-button btn-outline-info")
       .attr("value", "all");
     label_all.append("span").text("全て");
     const label_30 = ChartSelectGroup
       .append("button")
-      .attr("class", "btn btn-lg btn-outline-info active")
+      .attr("class", "btn chart-select-button btn-outline-info active")
       .attr("value", "30");
     label_30.append("span").text("TOP30");
     const label_20 = ChartSelectGroup
       .append("button")
-      .attr("class", "btn btn-lg btn-outline-info")
+      .attr("class", "btn chart-select-button btn-outline-info")
       .attr("value", "20");
     label_20.append("span").text("TOP20");
     const label_10 = ChartSelectGroup
       .append("button")
-      .attr("class", "btn btn-lg btn-outline-info")
+      .attr("class", "btn chart-select-button btn-outline-info")
       .attr("value", "10");
     label_10.append("span").text("TOP10");
 
@@ -352,7 +352,7 @@ class resultView {
       const result = d3.select(".result");
 
       const row = result.append("div")
-        .style("margin-top", "15px")
+        .classed("mt-3", true)
         .classed("row", true)
         .classed("justify-content-md-center", true);
 

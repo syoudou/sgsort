@@ -86,7 +86,7 @@ function initTheater() {
     });
 
   theater.append("div")
-    .style("margin-top", "15px")
+    .classed("mt-3", true)
     .classed("row", true)
     .classed("justify-content-md-center", true)
     .append("div")
@@ -110,7 +110,7 @@ function initTheater() {
     });
 
   const otherButtonRow = theater.append("div")
-    .style("margin-top", "15px")
+    .classed("mt-3", true)
     .classed("row", true)
     .classed("justify-content-md-center", true);
 
