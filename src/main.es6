@@ -125,6 +125,7 @@ function initTheater() {
       idolList.forEach((d) => {
         d.model.select = "none";
       });
+      orderList = [];
       update(idolList);
     });
 
