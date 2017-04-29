@@ -823,7 +823,7 @@ var resultView = function () {
     value: function result(list) {
       var type_color = { "キュート": "#FF55AA", "クール": "#5599EE", "パッション": "#FFBB66" };
       var c10 = d3.scaleOrdinal(d3.schemeCategory10);
-      var serverURI = "http://odenpa.com/sgsort/";
+      var serverURI = "https://odenpa.com/sgsort/";
       var result = d3.select(".container").append("div").classed("result", true);
 
       result.append("div").append("h2").text("結果");

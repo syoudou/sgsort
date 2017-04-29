@@ -5,7 +5,7 @@ class resultView {
   result(list) {
     const type_color = { "キュート": "#FF55AA", "クール": "#5599EE", "パッション": "#FFBB66" };
     const c10 = d3.scaleOrdinal(d3.schemeCategory10);
-    const serverURI = "http://odenpa.com/sgsort/";
+    const serverURI = "https://odenpa.com/sgsort/";
     const result = d3.select(".container")
       .append("div")
       .classed("result", true);
