@@ -126,7 +126,7 @@ function initTheater() {
         d.model.select = "none";
       });
       orderList = [];
-      update(idolList);
+      orderChange(idolList);
     });
 
   otherButtonRow
@@ -153,7 +153,7 @@ function initTheater() {
           d.model.select = "drop";
         }
       });
-      update(idolList);
+      orderChange(idolList);
     });
 }
 
@@ -174,7 +174,7 @@ function cardClick(d) {
     const insertIndex = index == 0 ? 1 : index - 1;
     orderList.splice(insertIndex, 0, selectIdol);
   }
-  update(idolList);
+  orderChange(idolList);
 }
 
 function updateOrder(d) {
@@ -204,15 +204,31 @@ function update(list) {
         .classed("card-outline-info", false);
     });
 
-  const header = card.append("div").classed("card-header", true);
-  const top = card.append("img").classed("card-img-top", true);
+  card.append("div").classed("card-header", true).attr("id", "order");
+  const img_warpper = card.append("div").classed("img-wrapper", true);
+  const top = img_warpper.append("img")
+    .classed("card-img-top", true)
+    .on('load', function () {
+      d3.select(this).classed("img-loading", false);
+      d3.select(this.parentNode).select("i").attr("class", "");
+    });
+  const spin = img_warpper.append("p").classed("img-spinner", true).append("i");
   const cardblock = card.append("div").classed("card-block", true);
-  const order = header.attr("id", "order");
   const name = cardblock.append("p").attr("id", "name");
 
-  top.merge(deck.select('img')).attr("src", (d) => `./img/${d.model.profile.id}.png`);
+  top.merge(deck.select('img'))
+    .classed("img-loading", true)
+    .attr("src", (d) => `./img/${d.model.profile.id}.png`);
+  spin.merge(deck.select('.img-spinner i')).attr("class", "fa fa-refresh fa-spin");
 
-  order.merge(deck.select('#order')).text(updateOrder)
+  name.merge(deck.select('#name')).text((d) => d.model.profile.name);
+
+  orderChange(list);
+}
+
+function orderChange(list) {
+  const deck = d3.select(".stage").selectAll(".card").data(list);
+  deck.select('#order').text(updateOrder)
     .classed("order-1", (d) => {
       return d.model.select === "order" && d.model.order === 1;
     }).classed("order-2", (d) => {
@@ -224,8 +240,6 @@ function update(list) {
     }).classed("order-unselected", (d) => {
       return d.model.select === "none";
     });
-  name.merge(deck.select('#name')).text((d) => d.model.profile.name);
-
   let nextEnable = true;
   idolList.forEach((d) => {
     if (d.model.select === "none") {

@@ -510,7 +510,7 @@ function initTheater() {
       d.model.select = "none";
     });
     orderList = [];
-    update(idolList);
+    orderChange(idolList);
   });
 
   otherButtonRow.append("div").classed("col-md-4", true).classed("col-sm-6", true).append("button").attr("class", "btn btn-success btn-block theaterOtherButton").attr("data-toggle", "modal").attr("data-target", "#FixOrderModal").attr("id", "decision").text("順位を確定する");
@@ -521,7 +521,7 @@ function initTheater() {
         d.model.select = "drop";
       }
     });
-    update(idolList);
+    orderChange(idolList);
   });
 }
 
@@ -542,7 +542,7 @@ function cardClick(d) {
     var insertIndex = index == 0 ? 1 : index - 1;
     orderList.splice(insertIndex, 0, selectIdol);
   }
-  update(idolList);
+  orderChange(idolList);
 }
 
 function updateOrder(d) {
@@ -567,17 +567,31 @@ function update(list) {
     d3.select(this).classed("card-outline-info", false);
   });
 
-  var header = card.append("div").classed("card-header", true);
-  var top = card.append("img").classed("card-img-top", true);
+  card.append("div").classed("card-header", true).attr("id", "order");
+  var img_warpper = card.append("div").classed("img-wrapper", true);
+  var top = img_warpper.append("img").classed("card-img-top", true).on('load', function () {
+    d3.select(this).classed("img-loading", false);
+    d3.select(this.parentNode).select("i").attr("class", "");
+  });
+  var spin = img_warpper.append("p").classed("img-spinner", true).append("i");
   var cardblock = card.append("div").classed("card-block", true);
-  var order = header.attr("id", "order");
   var name = cardblock.append("p").attr("id", "name");
 
-  top.merge(deck.select('img')).attr("src", function (d) {
+  top.merge(deck.select('img')).classed("img-loading", true).attr("src", function (d) {
     return "./img/" + d.model.profile.id + ".png";
   });
+  spin.merge(deck.select('.img-spinner i')).attr("class", "fa fa-refresh fa-spin");
 
-  order.merge(deck.select('#order')).text(updateOrder).classed("order-1", function (d) {
+  name.merge(deck.select('#name')).text(function (d) {
+    return d.model.profile.name;
+  });
+
+  orderChange(list);
+}
+
+function orderChange(list) {
+  var deck = d3.select(".stage").selectAll(".card").data(list);
+  deck.select('#order').text(updateOrder).classed("order-1", function (d) {
     return d.model.select === "order" && d.model.order === 1;
   }).classed("order-2", function (d) {
     return d.model.select === "order" && d.model.order === 2;
@@ -588,10 +602,6 @@ function update(list) {
   }).classed("order-unselected", function (d) {
     return d.model.select === "none";
   });
-  name.merge(deck.select('#name')).text(function (d) {
-    return d.model.profile.name;
-  });
-
   var nextEnable = true;
   idolList.forEach(function (d) {
     if (d.model.select === "none") {

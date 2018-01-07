@@ -5065,11 +5065,33 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   .hidden-print {
     display: none !important; } }
 
-.card-img-top {
-  max-width: 88px;
-  height: auto;
+.img-wrapper {
+  position: relative;
+  width: 88px;
+  height: 88px;
   margin-left: auto;
   margin-right: auto; }
+
+.card-img-top {
+  position: absolute;
+  width: 88px;
+  left: 50%;
+  margin-left: -44px; }
+
+.img-spinner {
+  position: absolute;
+  height: 60px;
+  top: 50%;
+  margin: -30px;
+  width: 60px;
+  left: 50%;
+  margin-left: -30px;
+  font-size: 60px;
+  opacity: 0.3;
+  line-height: 60px; }
+
+.img-loading {
+  opacity: 0.3; }
 
 .table-img {
   max-width: 88px; }
@@ -5154,8 +5176,12 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px; }
+  .img-wrapper {
+    width: 60px;
+    height: 60px; }
   .card-img-top {
-    max-width: 60px; }
+    width: 60px;
+    margin-left: -30px; }
   .card-header {
     font-size: 14px; }
   .card-header:first-letter {
