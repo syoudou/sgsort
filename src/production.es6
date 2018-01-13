@@ -17,7 +17,7 @@ class production {
     let ret = 0;
     let node = this.root;
     while (node.hasChildren()) {
-      if(node.children.length != 1)break;
+      if (node.children.length != 1) break;
       node = node.children[0];
       ret++;
     }
@@ -29,7 +29,7 @@ class production {
     let node = this.root;
     let order = 1;
     while (node.hasChildren()) {
-      if(node.children.length > 1) {
+      if (node.children.length > 1) {
         node.children.forEach((d) => {
           d.drop();
         });
@@ -47,7 +47,7 @@ class production {
     let order = 1;
     buf.forEach((id) => {
       this.waitingRoom.forEach((node, i) => {
-        if (Number(node.model.profile.id) == id){
+        if (Number(node.model.profile.id) == id) {
           node.model.order = order++;
           ret.push(this.waitingRoom.splice(i, 1)[0]);
           return;
@@ -89,22 +89,31 @@ class production {
       }
       this.shuffle(this.waitingRoom);
     }
-    let length = this.waitingRoom.length;
+    ret = this.waitingRoom.splice(0, this.getNextLength(this.waitingRoom.length));
+    return ret;
+  }
+
+  getSleevesOfStageIdolsNo() {
+    const length = this.getNextLength(this.waitingRoom.length);
+    return this.waitingRoom.filter((value, index) => index < length).map((node) => Number(node.model.profile.id));
+  }
+
+  getNextLength(length) {
+    let ret;
     switch (length) {
       case 12:
       case 11:
       case 8:
       case 7:
-        length = 4;
+        ret = 4;
         break;
       case 6:
-        length = 3;
+        ret = 3;
         break;
       default:
-        length = 5;
+        ret = 5;
         break;
     }
-    ret = this.waitingRoom.splice(0, length);
     return ret;
   }
 

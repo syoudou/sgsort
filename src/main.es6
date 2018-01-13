@@ -8,6 +8,7 @@ const myproduction = new production(idoldata);
 const resultView = new ResultView();
 let orderList = [];
 let idolList = {};
+const preloadImage = new Array(183);
 
 function finalizeTheater() {
   d3.select(".theater")
@@ -101,6 +102,7 @@ function initTheater() {
       orderList = [];
       myproduction.setdata(idolList);
       idolList = myproduction.getdata();
+      preload(myproduction.getSleevesOfStageIdolsNo());
       updateFixOrder();
       if (idolList.length == 0) {
         finalizeTheater();
@@ -226,6 +228,14 @@ function update(list) {
   orderChange(list);
 }
 
+function preload(list) {
+  list.forEach((id) => {
+    if(preloadImage[id - 1] == null) {
+      preloadImage[id - 1] = $("<img>").attr("src", `./img/${id}.png`);
+    }
+  });
+}
+
 function orderChange(list) {
   const deck = d3.select(".stage").selectAll(".card").data(list);
   deck.select('#order').text(updateOrder)
@@ -264,9 +274,11 @@ function init() {
   if (list.length !== 0) {
     resultView.result(list);
   } else {
+    preload(myproduction.getSleevesOfStageIdolsNo());
     idolList = myproduction.getdata();
     initTheater();
     update(idolList);
+    preload(myproduction.getSleevesOfStageIdolsNo());
   }
 }
 

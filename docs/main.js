@@ -460,6 +460,7 @@ var myproduction = new _production2.default(_data2.default);
 var resultView = new _resultView2.default();
 var orderList = [];
 var idolList = {};
+var preloadImage = new Array(183);
 
 function finalizeTheater() {
   d3.select(".theater").remove();
@@ -495,6 +496,7 @@ function initTheater() {
     orderList = [];
     myproduction.setdata(idolList);
     idolList = myproduction.getdata();
+    preload(myproduction.getSleevesOfStageIdolsNo());
     updateFixOrder();
     if (idolList.length == 0) {
       finalizeTheater();
@@ -589,6 +591,14 @@ function update(list) {
   orderChange(list);
 }
 
+function preload(list) {
+  list.forEach(function (id) {
+    if (preloadImage[id - 1] == null) {
+      preloadImage[id - 1] = $("<img>").attr("src", "./img/" + id + ".png");
+    }
+  });
+}
+
 function orderChange(list) {
   var deck = d3.select(".stage").selectAll(".card").data(list);
   deck.select('#order').text(updateOrder).classed("order-1", function (d) {
@@ -626,9 +636,11 @@ function init() {
   if (list.length !== 0) {
     resultView.result(list);
   } else {
+    preload(myproduction.getSleevesOfStageIdolsNo());
     idolList = myproduction.getdata();
     initTheater();
     update(idolList);
+    preload(myproduction.getSleevesOfStageIdolsNo());
   }
 }
 
@@ -745,29 +757,44 @@ var production = function () {
           this.currentNode = this.currentNode.children[0];
         }
         if (this.currentNode.hasChildren()) {
-          var _length = this.currentNode.children.length;
-          for (var j = 0; j < _length; j++) {
+          var length = this.currentNode.children.length;
+          for (var j = 0; j < length; j++) {
             this.waitingRoom.push(this.currentNode.children[0].drop());
           }
         }
         this.shuffle(this.waitingRoom);
       }
-      var length = this.waitingRoom.length;
+      ret = this.waitingRoom.splice(0, this.getNextLength(this.waitingRoom.length));
+      return ret;
+    }
+  }, {
+    key: "getSleevesOfStageIdolsNo",
+    value: function getSleevesOfStageIdolsNo() {
+      var length = this.getNextLength(this.waitingRoom.length);
+      return this.waitingRoom.filter(function (value, index) {
+        return index < length;
+      }).map(function (node) {
+        return Number(node.model.profile.id);
+      });
+    }
+  }, {
+    key: "getNextLength",
+    value: function getNextLength(length) {
+      var ret = void 0;
       switch (length) {
         case 12:
         case 11:
         case 8:
         case 7:
-          length = 4;
+          ret = 4;
           break;
         case 6:
-          length = 3;
+          ret = 3;
           break;
         default:
-          length = 5;
+          ret = 5;
           break;
       }
-      ret = this.waitingRoom.splice(0, length);
       return ret;
     }
   }, {
