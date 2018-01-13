@@ -5161,6 +5161,9 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     padding-bottom: 0px;
     padding-left: 0px;
     padding-right: 0px; }
+  .img-wrapper {
+    width: 60px;
+    height: 60px; }
   .card-img-top {
     width: 60px;
     margin-left: -30px; }
