@@ -5227,8 +5227,7 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
     color: #FFFFFF;
     background-color: #0c7abf; }
 
-.twitter-share-button img {
-  width: 30px;
+.twitter-share-button i {
   margin-right: 15px; }
 
 @font-face {

@@ -57,12 +57,8 @@ class resultView {
       buf.push(Number(d.model.profile.id));
     });
 
-    //console.log(buf);
     const b64 = Base64.encode(buf);
     const b64_30 = Base64.encode(buf.slice(0, 30));
-    // console.log(b64);
-    // const nb64 = Base64.decode(b64);
-    // console.log(nb64);
 
     let text = "【デレステキャラソート結果】";
     for (let i = 0; i < list.length; i++) {
@@ -87,7 +83,7 @@ class resultView {
         window.open(encodeURI(decodeURI(this.href)), 'TWwindow', 'width=600, height=500, menubar=no, toolbar=no, scrollbars=yes');
         return false;
       });
-    tw_30.append("img").attr("src", "./img/twitter_icon.svg");
+    tw_30.append("i").attr("class", "fa fa-twitter").attr("aria-hidden", "true");
     tw_30.append("span").text("結果をツイートする(上位30位)");
     const tw = snsblock.append("div")
       .classed("col-lg-5", true)
@@ -101,7 +97,7 @@ class resultView {
         window.open(encodeURI(decodeURI(this.href)), 'TWwindow', 'width=600, height=500, menubar=no, toolbar=no, scrollbars=yes');
         return false;
       });
-    tw.append("img").attr("src", "./img/twitter_icon.svg");
+    tw.append("i").attr("class", "fa fa-twitter").attr("aria-hidden", "true");
     tw.append("span").text("結果をツイートする(全て)");
 
     //リンク
@@ -114,7 +110,6 @@ class resultView {
       .classed("col-lg-6", true)
       .classed("col-md-10", true)
       .classed("mt-3", true)
-      .append("h2")
       .append("a")
       .attr("class", "btn btn-block btn-success btn-lg")
       .attr("href", serverURI)

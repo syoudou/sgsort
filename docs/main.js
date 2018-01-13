@@ -492,7 +492,7 @@ function initTheater() {
     finalizeTheater();
   });
 
-  theater.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true).append("div").classed("col-md-6", true).classed("col-sm-8", true).append("button").classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true).attr("disabled", "").attr("id", "nextStage").text("次へ").on("click", function () {
+  theater.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true).append("div").classed("col-md-6", true).classed("col-sm-12", true).append("button").classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true).attr("disabled", "").attr("id", "nextStage").text("次へ").on("click", function () {
     orderList = [];
     myproduction.setdata(idolList);
     idolList = myproduction.getdata();
@@ -900,12 +900,8 @@ var resultView = function () {
         buf.push(Number(d.model.profile.id));
       });
 
-      //console.log(buf);
       var b64 = _Base2.default.encode(buf);
       var b64_30 = _Base2.default.encode(buf.slice(0, 30));
-      // console.log(b64);
-      // const nb64 = Base64.decode(b64);
-      // console.log(nb64);
 
       var text = "【デレステキャラソート結果】";
       for (var i = 0; i < list.length; i++) {
@@ -921,19 +917,19 @@ var resultView = function () {
         window.open(encodeURI(decodeURI(this.href)), 'TWwindow', 'width=600, height=500, menubar=no, toolbar=no, scrollbars=yes');
         return false;
       });
-      tw_30.append("img").attr("src", "./img/twitter_icon.svg");
+      tw_30.append("i").attr("class", "fa fa-twitter").attr("aria-hidden", "true");
       tw_30.append("span").text("結果をツイートする(上位30位)");
       var tw = snsblock.append("div").classed("col-lg-5", true).classed("col-md-8", true).append("a").attr("href", uri).attr("target", "_blank").classed("btn", true).classed("twitter-share-button", true).classed("btn-block", true).on("click", function () {
         d3.event.preventDefault();
         window.open(encodeURI(decodeURI(this.href)), 'TWwindow', 'width=600, height=500, menubar=no, toolbar=no, scrollbars=yes');
         return false;
       });
-      tw.append("img").attr("src", "./img/twitter_icon.svg");
+      tw.append("i").attr("class", "fa fa-twitter").attr("aria-hidden", "true");
       tw.append("span").text("結果をツイートする(全て)");
 
       //リンク
 
-      result.append("div").classed("row", true).classed("justify-content-md-center", true).classed("row", true).append("div").classed("col-lg-6", true).classed("col-md-10", true).classed("mt-3", true).append("h2").append("a").attr("class", "btn btn-block btn-success btn-lg").attr("href", serverURI).text("最初からキャラソートを始める");
+      result.append("div").classed("row", true).classed("justify-content-md-center", true).classed("row", true).append("div").classed("col-lg-6", true).classed("col-md-10", true).classed("mt-3", true).append("a").attr("class", "btn btn-block btn-success btn-lg").attr("href", serverURI).text("最初からキャラソートを始める");
 
       //グラフ表示始め
       result.append("div").classed("mt-3", true).append("h2").text("結果のグラフ").append("hr");

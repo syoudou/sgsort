@@ -92,7 +92,7 @@ function initTheater() {
     .classed("justify-content-md-center", true)
     .append("div")
     .classed("col-md-6", true)
-    .classed("col-sm-8", true)
+    .classed("col-sm-12", true)
     .append("button")
     .classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true)
     .attr("disabled", "")
