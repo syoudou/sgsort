@@ -209,19 +209,14 @@ function update(list) {
   card.append("div").classed("card-header", true).attr("id", "order");
   const img_warpper = card.append("div").classed("img-wrapper", true);
   const top = img_warpper.append("img")
-    .classed("card-img-top", true)
-    .on('load', function () {
-      d3.select(this).classed("img-loading", false);
-      d3.select(this.parentNode).select("i").attr("class", "");
-    });
-  const spin = img_warpper.append("p").classed("img-spinner", true).append("i");
+    .classed("card-img-top", true);
   const cardblock = card.append("div").classed("card-block", true);
   const name = cardblock.append("p").attr("id", "name");
 
   top.merge(deck.select('img'))
-    .classed("img-loading", true)
+    .attr("src", '');
+  top.merge(deck.select('img'))
     .attr("src", (d) => `./img/${d.model.profile.id}.png`);
-  spin.merge(deck.select('.img-spinner i')).attr("class", "fa fa-refresh fa-spin");
 
   name.merge(deck.select('#name')).text((d) => d.model.profile.name);
 

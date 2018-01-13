@@ -571,18 +571,14 @@ function update(list) {
 
   card.append("div").classed("card-header", true).attr("id", "order");
   var img_warpper = card.append("div").classed("img-wrapper", true);
-  var top = img_warpper.append("img").classed("card-img-top", true).on('load', function () {
-    d3.select(this).classed("img-loading", false);
-    d3.select(this.parentNode).select("i").attr("class", "");
-  });
-  var spin = img_warpper.append("p").classed("img-spinner", true).append("i");
+  var top = img_warpper.append("img").classed("card-img-top", true);
   var cardblock = card.append("div").classed("card-block", true);
   var name = cardblock.append("p").attr("id", "name");
 
-  top.merge(deck.select('img')).classed("img-loading", true).attr("src", function (d) {
+  top.merge(deck.select('img')).attr("src", '');
+  top.merge(deck.select('img')).attr("src", function (d) {
     return "./img/" + d.model.profile.id + ".png";
   });
-  spin.merge(deck.select('.img-spinner i')).attr("class", "fa fa-refresh fa-spin");
 
   name.merge(deck.select('#name')).text(function (d) {
     return d.model.profile.name;
