@@ -476,6 +476,8 @@ function initTheater() {
   memo.append("span").text("リタイアすると次から表示されません");
   theater.append("div").classed("card-deck", true).classed("stage", true);
 
+  theater.append("div").classed("progress", true).attr("id", "sortProgress").append("div").classed("progress-bar", true).attr("role", "progressbar").style("width", "0%").attr("aria-valuenow", 0).attr("aria-valuemin", 0).attr("aria-valuemax", 100).text("0%");
+
   var fixOrderModal = theater.append("div").attr("class", "modal fade").attr("id", "FixOrderModal").attr("tabindex", -1).attr("role", "dialog").attr("aria-labelledby", "FixOrderModalLabel").attr("aria-hidden", "true").append("div").classed("modal-dialog", true).attr("role", "document").append("div").classed("modal-content", true);
 
   var foModalHeader = fixOrderModal.append("div").classed("modal-header", true);
@@ -495,6 +497,7 @@ function initTheater() {
   theater.append("div").classed("mt-3", true).classed("row", true).classed("justify-content-md-center", true).append("div").classed("col-md-6", true).classed("col-sm-12", true).append("button").classed("btn", true).classed("btn-primary", true).classed("btn-lg", true).classed("btn-block", true).attr("disabled", "").attr("id", "nextStage").text("次へ").on("click", function () {
     orderList = [];
     myproduction.setdata(idolList);
+    updateProgress(myproduction.getScore());
     idolList = myproduction.getdata();
     preload(myproduction.getSleevesOfStageIdolsNo());
     updateFixOrder();
@@ -587,6 +590,11 @@ function update(list) {
   orderChange(list);
 }
 
+function updateProgress(score) {
+  var percent = Math.floor(score.value / score.max * 10000) / 100;
+  d3.select("#sortProgress .progress-bar").style("width", percent + "%").attr("aria-valuenow", percent).text(percent + "(" + score.value + "/" + score.max + ")");
+}
+
 function preload(list) {
   list.forEach(function (id) {
     if (preloadImage[id - 1] == null) {
@@ -667,9 +675,10 @@ var production = function () {
 
     _classCallCheck(this, production);
 
-    this.root = tree.parse({});
+    this.root = tree.parse(new idol({ id: 0 }));
     this.currentNode = this.root;
     this.waitingRoom = [];
+    this.totalIdol = list.length;
     list.forEach(function (data) {
       _this.waitingRoom.push(tree.parse(new idol(data)));
     });
@@ -687,6 +696,45 @@ var production = function () {
         ret++;
       }
       return ret;
+    }
+  }, {
+    key: "getScore",
+    value: function getScore() {
+      var _this2 = this;
+
+      var ret = 0;
+      var rootPoint = this.totalIdol - 1;
+      this.root.walk(function (node) {
+        if (node.model.profile.id == _this2.currentNode.model.profile.id) {
+          return false;
+        } else {
+          ret += rootPoint--;
+        }
+      });
+      for (var i = 0; i < this.currentNode.children.length; i++) {
+        ret += _nodeCount(this.currentNode.children[i]);
+      }
+      for (var _i = 0; _i < this.waitingRoom.length; _i++) {
+        ret += _nodeCount(this.waitingRoom[_i]);
+      }
+      return { max: this.totalIdol * (this.totalIdol - 1) / 2, value: ret };
+      function _nodeCount(_node) {
+        var point = 0;
+        _sub(_node);
+        return point;
+        function _sub(__node) {
+          if (__node.hasChildren()) {
+            var _point = 0;
+            for (var _i2 = 0; _i2 < __node.children.length; _i2++) {
+              _point += _sub(__node.children[_i2]);
+            }
+            point += _point;
+            return _point + 1;
+          } else {
+            return 1;
+          }
+        }
+      }
     }
   }, {
     key: "getStandings",
@@ -710,15 +758,15 @@ var production = function () {
   }, {
     key: "bufToIdoles",
     value: function bufToIdoles(buf) {
-      var _this2 = this;
+      var _this3 = this;
 
       var ret = [];
       var order = 1;
       buf.forEach(function (id) {
-        _this2.waitingRoom.forEach(function (node, i) {
+        _this3.waitingRoom.forEach(function (node, i) {
           if (Number(node.model.profile.id) == id) {
             node.model.order = order++;
-            ret.push(_this2.waitingRoom.splice(i, 1)[0]);
+            ret.push(_this3.waitingRoom.splice(i, 1)[0]);
             return;
           }
         });
@@ -728,7 +776,10 @@ var production = function () {
   }, {
     key: "setdata",
     value: function setdata(list) {
+      var _this4 = this;
+
       var newList = list.filter(function (v) {
+        if (v.model.select === "drop") _this4.totalIdol--;
         return v.model.select === "order";
       });
       newList.sort(function (a, b) {

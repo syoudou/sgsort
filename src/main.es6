@@ -29,6 +29,15 @@ function initTheater() {
     .classed("card-deck", true)
     .classed("stage", true);
 
+  theater.append("div").classed("progress", true).attr("id", "sortProgress")
+    .append("div").classed("progress-bar", true)
+    .attr("role", "progressbar")
+    .style("width", "0%")
+    .attr("aria-valuenow", 0)
+    .attr("aria-valuemin", 0)
+    .attr("aria-valuemax", 100)
+    .text("0%");
+
   const fixOrderModal = theater.append("div")
     .attr("class", "modal fade")
     .attr("id", "FixOrderModal")
@@ -101,6 +110,7 @@ function initTheater() {
     .on("click", () => {
       orderList = [];
       myproduction.setdata(idolList);
+      updateProgress(myproduction.getScore());
       idolList = myproduction.getdata();
       preload(myproduction.getSleevesOfStageIdolsNo());
       updateFixOrder();
@@ -223,9 +233,17 @@ function update(list) {
   orderChange(list);
 }
 
+function updateProgress(score) {
+  const percent = Math.floor(score.value / score.max * 10000) / 100;
+  d3.select("#sortProgress .progress-bar")
+    .style("width", `${percent}%`)
+    .attr("aria-valuenow", percent)
+    .text(`${percent}(${score.value}/${score.max})`);
+}
+
 function preload(list) {
   list.forEach((id) => {
-    if(preloadImage[id - 1] == null) {
+    if (preloadImage[id - 1] == null) {
       preloadImage[id - 1] = $("<img>").attr("src", `./img/${id}.png`);
     }
   });
