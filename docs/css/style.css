@@ -5144,7 +5144,8 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
   white-space: nowrap; }
 
 #SenkyoButton {
-  padding: 0px; }
+  padding: 0px;
+  margin-left: 15px; }
 
 #AboutButton {
   padding: 0;
