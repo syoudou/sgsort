@@ -1,26 +1,82 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>デレステ キャラソート</title>
-    <link href="css/style.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-  </head>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1 class="mt-3 title">デレステ キャラソート</h1>
-        <hr>
-        <p>デレステに登場するアイドル183人のキャラソートです。</p>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>デレステ キャラソート</title>
+  <link href="css/style.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div class="container" id="main">
+    <div class="header">
+      <h1 class="mt-3 title">デレステ キャラソート</h1>
+      <hr>
+      <p>デレステに登場するアイドル183人のキャラソートです。</p>
+    </div>
+  </div>
+  <div class="container">
+    <hr>
+    <button id="AboutButton" type="button" class="btn btn-link btn-sm btn-block center-block" data-toggle="modal" data-target="#aboutModal">
+      デレステキャラソートとは
+    </button>
+  </div>
+  <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="aboutModalLabel">デレステキャラソートとは</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>これは何？</h5>
+          <p>キャラクターを並び替えて遊ぶキャラソートです。従来の2択式だと膨大な時間がかかるので、多選択方式のを作ってみました。それでも全員やると時間がかかります。</p>
+          <hr>
+          <h5>なんで「デレステ」なの？</h5>
+          <p>アイドルのプロフィールをデレステから参照しているからです。モバマスは身長伸びたりしてるので。それとモバマス向けのキャラソートは既に存在していたからというのも理由の一つです。</p>
+          <hr>
+          <h5>第7回シンデレラガール総選挙応援！ </h5>
+          <img class="pull-right img-responsive" style="padding:0;margin:0 0 15px 15px;" src="./img/miku2.png">
+          <p>突然ですが宣伝です。キャラソートと比べたらお時間はいただきません。少しだけお付き合いいただけると幸いです。</p>
+          <p>まもなくモバゲーで配信されているアイドルマスターシンデレラガールズ(通称：モバマス)で、「第7回シンデレラガール総選挙」が開催されます。</p>
+          <p class="clearfix">デレステしか遊んでないよという方も、この総選挙というお祭りに参加してみませんか？そしてあなたのお力を前川みくに分けていただけでないでしょうか。</p>
+          <h4>前川みくのご紹介</h4>
+          <img class="pull-left img-responsive" style="padding:0;margin:0 15px 15px 0;" src="./img/miku1.png">
+          <p>猫耳を付けてにゃあにゃあ言ってる世界一かわいいネコチャンアイドルです。そんな彼女ですが根はとってもマジメ。ネコチャンアイドルをやっているのも、デビューしたての頃に他のアイドルに埋もれて鳴かず飛ばずだった時に一生懸命考えた起死回生の策だったのです。</p>
+          <p class="clearfix">ネコチャンを手に入れた前川みくはアイドルとして日の目を見ることができました。しかし、そんな成功経験からなのか、ネコチャンが無いとまた埋もれていたころに戻ってしまう、と不安に思っている節があります。</p>
+          <img class="pull-right img-responsive" style="padding:0;margin:0 0 15px 15px;" src="./img/miku3.png">
+          <p>そんなことはあり得ません！ネコチャンはみく自身が努力で手に入れたものです。みくがアイドルを目指して真面目に、ひたむきに、前のめりで挑戦し、努力し続ける姿が魅力的なのです。それは決して埋もれない唯一の個性です。</p>
+          <p>最近は猫耳を外す出番も増えてきて、少しずつそんな不安も解消しているように見えます。でもまだ完全に払拭できていないと思います。</p>
+          <p>そんな今だからこそ、今まで努力してきたことは間違っていないよ！その魅力はみく自身のものだよ！最高にかわいいよ！と全力で肯定してあげたいのです。</p>
+          <h4>最後に</h4>
+          <p>話が長くなってしまい、申し訳ございません。ほんの少しでもお力を分けていただけたら幸いです。</p>
+          <p>改めて、第7回アイドルマスターシンデレラガール総選挙、前川みくをよろしくお願いいたします。</p>
+          <hr>
+          <h5>ご要望・ご質問</h5>
+          <p>
+            <a href="https://twitter.com/syoudou" target="_blank">@syoudou</a>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-  </body>
+  </div>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+    crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+
 </html>

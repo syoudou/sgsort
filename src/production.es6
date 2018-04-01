@@ -4,9 +4,10 @@ const tree = new TreeModel();
 
 class production {
   constructor(list) {
-    this.root = tree.parse({});
+    this.root = tree.parse(new idol({ id: 0 }));
     this.currentNode = this.root;
     this.waitingRoom = [];
+    this.totalIdol = list.length;
     list.forEach((data) => {
       this.waitingRoom.push(tree.parse(new idol(data)));
     });
@@ -22,6 +23,42 @@ class production {
       ret++;
     }
     return ret;
+  }
+
+  getScore() {
+    let ret = 0;
+    let rootPoint = this.totalIdol - 1;
+    this.root.walk((node) => {
+      if(node.model.profile.id == this.currentNode.model.profile.id) {
+        return false;
+      } else {
+        ret += rootPoint--;
+      }
+    });
+    for (let i = 0; i < this.currentNode.children.length; i++) {
+      ret += _nodeCount(this.currentNode.children[i]);
+    }
+    for(let i = 0; i < this.waitingRoom.length; i++) {
+      ret += _nodeCount(this.waitingRoom[i]);
+    }
+    return {max: this.totalIdol * (this.totalIdol - 1) / 2, value: ret};
+    function _nodeCount(_node) {
+      let point = 0;
+      _sub(_node);
+      return point;
+      function _sub(__node) {
+        if (__node.hasChildren()) {
+          let _point = 0;
+          for (let i = 0; i < __node.children.length; i++) {
+            _point += _sub(__node.children[i]);
+          }
+          point += _point;
+          return _point + 1;
+        } else {
+          return 1;
+        }
+      }
+    }
   }
 
   getStandings() {
@@ -58,7 +95,12 @@ class production {
   }
 
   setdata(list) {
-    const newList = list.filter(function (v) {
+    const newList = list.filter((v) => {
+      if (v.model.select === "drop") {
+        v.all(() => {
+          this.totalIdol--;
+        });
+      }
       return (v.model.select === "order");
     });
     newList.sort((a, b) => {
