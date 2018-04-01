@@ -17,7 +17,7 @@ function finalizeTheater() {
 }
 
 function initTheater() {
-  const theater = d3.select(".container")
+  const theater = d3.select("#main")
     .append("div")
     .classed("theater", true);
 
@@ -238,7 +238,7 @@ function updateProgress(score) {
   d3.select("#sortProgress .progress-bar")
     .style("width", `${percent}%`)
     .attr("aria-valuenow", percent)
-    .text(`${percent}(${score.value}/${score.max})`);
+    .text(`${percent}%(${score.value}/${score.max})`);
 }
 
 function preload(list) {

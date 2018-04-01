@@ -96,7 +96,11 @@ class production {
 
   setdata(list) {
     const newList = list.filter((v) => {
-      if (v.model.select === "drop") this.totalIdol--;
+      if (v.model.select === "drop") {
+        v.all(() => {
+          this.totalIdol--;
+        });
+      }
       return (v.model.select === "order");
     });
     newList.sort((a, b) => {

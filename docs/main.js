@@ -468,7 +468,7 @@ function finalizeTheater() {
 }
 
 function initTheater() {
-  var theater = d3.select(".container").append("div").classed("theater", true);
+  var theater = d3.select("#main").append("div").classed("theater", true);
 
   var memo = theater.append("div").append("p");
   memo.append("span").text("上位から順番に選択してください");
@@ -592,7 +592,7 @@ function update(list) {
 
 function updateProgress(score) {
   var percent = Math.floor(score.value / score.max * 10000) / 100;
-  d3.select("#sortProgress .progress-bar").style("width", percent + "%").attr("aria-valuenow", percent).text(percent + "(" + score.value + "/" + score.max + ")");
+  d3.select("#sortProgress .progress-bar").style("width", percent + "%").attr("aria-valuenow", percent).text(percent + "%(" + score.value + "/" + score.max + ")");
 }
 
 function preload(list) {
@@ -779,7 +779,11 @@ var production = function () {
       var _this4 = this;
 
       var newList = list.filter(function (v) {
-        if (v.model.select === "drop") _this4.totalIdol--;
+        if (v.model.select === "drop") {
+          v.all(function () {
+            _this4.totalIdol--;
+          });
+        }
         return v.model.select === "order";
       });
       newList.sort(function (a, b) {
@@ -908,7 +912,7 @@ var resultView = function () {
       var type_color = { "キュート": "#FF55AA", "クール": "#5599EE", "パッション": "#FFBB66" };
       var c10 = d3.scaleOrdinal(d3.schemeCategory10);
       var serverURI = "https://odenpa.com/sgsort/";
-      var result = d3.select(".container").append("div").classed("result", true);
+      var result = d3.select("#main").append("div").classed("result", true);
 
       result.append("div").append("h2").text("結果");
       result.append("div").append("hr");
@@ -937,6 +941,9 @@ var resultView = function () {
       }).append("img").attr("src", function (d) {
         return "./img/" + d.model.profile.id + ".png";
       }).classed("table-img", true);
+      tbody_tr.select(".table-image").filter(function (d) {
+        return d.model.order <= 30 && d.model.profile.name == "前川みく";
+      }).append("button").attr("id", "SenkyoButton").attr("class", "btn btn-link").attr("data-toggle", "modal").attr("data-target", "#SenkyoModal").append("i").attr("class", "fa fa-comment").attr("aria-hidden", "true");
       tbody_tr.select(".table-name").text(function (d) {
         return d.model.profile.name;
       });
@@ -978,6 +985,33 @@ var resultView = function () {
 
       result.append("div").classed("row", true).classed("justify-content-md-center", true).classed("row", true).append("div").classed("col-lg-6", true).classed("col-md-10", true).classed("mt-3", true).append("a").attr("class", "btn btn-block btn-success btn-lg").attr("href", serverURI).text("最初からキャラソートを始める");
 
+      var sModalContent = result.append("div").attr("class", "modal fade").attr("id", "SenkyoModal").attr("tabindex", "-1").attr("role", "dialog").attr("aria-labelledby", "SenkyoModalLabel").attr("aria-hidden", "true").append("div").classed("modal-dialog", true).attr("role", "document").append("div").classed("modal-content", true);
+
+      var sModalHeader = sModalContent.append("div").classed("modal-header", true);
+
+      sModalHeader.append("h5").attr("id", "SenkyoModalLabel").text("第7回シンデレラガール総選挙応援！");
+      sModalHeader.append("button").classed("close", true).attr("data-dismiss", "modal").attr("aria-label", "Close").append("span").attr("aria-hidden", "true").text("\xD7");
+      var sModalBody = sModalContent.append("div").classed("modal-body", true);
+      sModalBody.append("img").attr("class", "pull-right img-responsive").attr("style", "padding:0;margin:0 0 15px 15px;").attr("src", "./img/miku2.png");
+      sModalBody.append("h4").text("ご挨拶");
+      sModalBody.append("p").text("キャラソートお疲れさまでした！");
+      sModalBody.append("p").text("楽しんでいただけましたでしょうか。");
+      sModalBody.append("p").text("突然ですが宣伝です。キャラソートと比べたらお時間はいただきません。少しだけお付き合いいただけると幸いです。");
+      sModalBody.append("p").text("まもなくモバゲーで配信されているアイドルマスターシンデレラガールズ(通称：モバマス)で、「第7回シンデレラガール総選挙」が開催されます。");
+      sModalBody.append("p").classed("clearfix", true).text("デレステしか遊んでないよという方も、この総選挙というお祭りに参加してみませんか？そしてあなたのお力を前川みくに分けていただけでないでしょうか。");
+      sModalBody.append("h4").text("前川みくのご紹介");
+      sModalBody.append("img").attr("class", "pull-left img-responsive").attr("style", "padding:0;margin:0 15px 15px 0;").attr("src", "./img/miku1.png");
+      sModalBody.append("p").text("猫耳を付けてにゃあにゃあ言ってる世界一かわいいネコチャンアイドルです。そんな彼女ですが根はとってもマジメ。ネコチャンアイドルをやっているのも、デビューしたての頃に他のアイドルに埋もれて鳴かず飛ばずだった時に一生懸命考えた起死回生の策だったのです。");
+      sModalBody.append("p").classed("clearfix", true).text("ネコチャンを手に入れた前川みくはアイドルとして日の目を見ることができました。しかし、そんな成功経験からなのか、ネコチャンが無いとまた埋もれていたころに戻ってしまう、と不安に思っている節があります。");
+      sModalBody.append("img").attr("class", "pull-right img-responsive").attr("style", "padding:0;margin:0 0 15px 15px;").attr("src", "./img/miku3.png");
+      sModalBody.append("p").text("そんなことはあり得ません！ネコチャンはみく自身が努力で手に入れたものです。みくがアイドルを目指して真面目に、ひたむきに、前のめりで挑戦し、努力し続ける姿が魅力的なのです。それは決して埋もれない唯一の個性です。");
+      sModalBody.append("p").text("最近は猫耳を外す出番も増えてきて、少しずつそんな不安も解消しているように見えます。でもまだ完全に払拭できていないと思います。");
+      sModalBody.append("p").text("そんな今だからこそ、今まで努力してきたことは間違っていないよ！その魅力はみく自身のものだよ！最高にかわいいよ！と全力で肯定してあげたいのです。");
+      sModalBody.append("h4").text("最後に");
+      sModalBody.append("p").text("話が長くなってしまい、申し訳ございません。ほんの少しでもお力を分けていただけたら幸いです。");
+      sModalBody.append("p").text("改めて、第7回アイドルマスターシンデレラガール総選挙、前川みくをよろしくお願いいたします。");
+      sModalBody.append("p").classed("clearfix", true).text("著：@syoudou");
+      sModalContent.append("div").classed("modal-footer", true).append("button").attr("type", "button").attr("class", "btn btn-secondary").attr("data-dismiss", "modal").text("閉じる");
       //グラフ表示始め
       result.append("div").classed("mt-3", true).append("h2").text("結果のグラフ").append("hr");
 

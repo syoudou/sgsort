@@ -5140,6 +5140,16 @@ a.text-gray-dark:focus, a.text-gray-dark:hover {
 #sortProgress {
   margin-top: 10px; }
 
+.progress-bar {
+  white-space: nowrap; }
+
+#SenkyoButton {
+  padding: 0px; }
+
+#AboutButton {
+  padding: 0;
+  color: gray; }
+
 @media (max-width: 575px) {
   .title {
     font-size: 1.5rem; } }
