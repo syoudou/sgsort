@@ -49,7 +49,7 @@ class resultView {
 
     tbody_tr.select(".table-rank").text((d) => d.model.order + "位");
     tbody_tr.select(".table-image").filter((d) => d.model.order <= 10).append("img").attr("src", (d) => `./img/${d.model.profile.id}.png`).classed("table-img", true);
-    tbody_tr.select(".table-image").filter((d) => d.model.order <= 30 && d.model.profile.name == "前川みく")
+    tbody_tr.select(".table-image").filter((d) => d.model.order <= 50 && d.model.profile.name == "前川みく")
       .append("button")
       .attr("id", "SenkyoButton")
       .attr("class", "btn btn-link")
