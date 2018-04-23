@@ -942,7 +942,7 @@ var resultView = function () {
         return "./img/" + d.model.profile.id + ".png";
       }).classed("table-img", true);
       tbody_tr.select(".table-image").filter(function (d) {
-        return d.model.order <= 50 && d.model.profile.name == "前川みく";
+        return d.model.order <= 69 && d.model.profile.name == "前川みく";
       }).append("button").attr("id", "SenkyoButton").attr("class", "btn btn-link").attr("data-toggle", "modal").attr("data-target", "#SenkyoModal").append("i").attr("class", "fa fa-comment").attr("aria-hidden", "true");
       tbody_tr.select(".table-name").text(function (d) {
         return d.model.profile.name;
