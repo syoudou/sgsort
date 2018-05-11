@@ -49,15 +49,17 @@ class resultView {
 
     tbody_tr.select(".table-rank").text((d) => d.model.order + "位");
     tbody_tr.select(".table-image").filter((d) => d.model.order <= 10).append("img").attr("src", (d) => `./img/${d.model.profile.id}.png`).classed("table-img", true);
-    tbody_tr.select(".table-image").filter((d) => d.model.order <= 69 && d.model.profile.name == "前川みく")
-      .append("button")
-      .attr("id", "SenkyoButton")
-      .attr("class", "btn btn-link")
-      .attr("data-toggle", "modal")
-      .attr("data-target", "#SenkyoModal")
-      .append("i")
-      .attr("class", "fa fa-comment")
-      .attr("aria-hidden", "true");
+
+    // 総選挙宣伝
+    // tbody_tr.select(".table-image").filter((d) => d.model.order <= 69 && d.model.profile.name == "前川みく")
+    //   .append("button")
+    //   .attr("id", "SenkyoButton")
+    //   .attr("class", "btn btn-link")
+    //   .attr("data-toggle", "modal")
+    //   .attr("data-target", "#SenkyoModal")
+    //   .append("i")
+    //   .attr("class", "fa fa-comment")
+    //   .attr("aria-hidden", "true");
     tbody_tr.select(".table-name").text((d) => d.model.profile.name);
 
     //SNS
