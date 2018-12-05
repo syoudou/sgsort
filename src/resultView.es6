@@ -382,7 +382,7 @@ class resultView {
         .attr("r", size / 80)
         .attr("fill", (d) => type_color[d.model.profile.type])
         .attr("cx", function (d) {
-          if (d.model.dupl_count) {
+          if (d.model.dupl_count > 1) {
             const r = d3.select(this).attr("r");
             return xScale(d.model.profile.age_num) - ((d.model.dupl_count - 1) * r) + (d.model.dupl_index * 2 * r);
           }
@@ -602,6 +602,9 @@ class resultView {
                 d.values[i].model["dupl_count"] = d.values.length;
                 d.values[i].model["dupl_index"] = i;
               }
+            } else {
+              d.values[0].model["dupl_count"] = 1;
+              d.values[0].model["dupl_index"] = 0;
             }
           });
         });
