@@ -8,7 +8,7 @@ const myproduction = new production(idoldata);
 const resultView = new ResultView();
 let orderList = [];
 let idolList = {};
-const preloadImage = new Array(185);
+const preloadImage = new Array(187);
 
 function finalizeTheater() {
   d3.select(".theater")
